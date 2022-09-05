@@ -23,5 +23,6 @@ pytz==2022.2.1
 restx-monkey==0.2.1
 six==1.16.0
 SQLAlchemy==1.4.40
+sqlalchemy-mixins==1.5.3
 toml==0.10.2
 Werkzeug==2.2.2
