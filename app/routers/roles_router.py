@@ -4,7 +4,7 @@ from app import api
 from flask import request
 from flask_restx import Resource
 from app.schemas.roles_schema import RolesRequestSchema
-from app.controllers.roles_controller import RolesControler
+from app.controllers.roles_controller import RolesController
 
 # ?crear modulo de usuarios
 roles_ns = api.namespace(
@@ -24,16 +24,16 @@ request_schema = RolesRequestSchema(roles_ns)
 @roles_ns.route('/')
 class Roles(Resource):
     def get(self):
-        return {
-            'message':  'hola Usuario',
-        }
+        '''Listar todos los roles'''
+        controller = RolesController()
+        return controller.all()
 
     @api.expect(request_schema.create(), validate=True)
     def post(self):
         # describimos en swagger
         '''Creacion de Roles'''
-        #* hacemos un request del body
-        controler = RolesControler()
+        # * hacemos un request del body
+        controler = RolesController()
         return controler.create(request.json)
 
         return {
