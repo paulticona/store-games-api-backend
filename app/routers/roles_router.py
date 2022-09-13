@@ -46,14 +46,15 @@ class Roles(Resource):
 @roles_ns.route('/<int:id>')
 class rolesGetById(Resource):
     def get(self, id):
-        return {
-            'message': f'ID: {id}',
-        }
+        '''Obtener un rol por el ID'''
+        controller = RolesController()
+        return controller.getById(id)
 
+    @api.expect(request_schema.update(), validate=True)
     def put(self, id):
-        return {
-            'message': f'UPDATE ID: {id}',
-        }
+        '''Actualizar un rol por el ID'''
+        controller = RolesController()
+        return controller.update(id, request.json)
 
     def delete(self, id):
         return {

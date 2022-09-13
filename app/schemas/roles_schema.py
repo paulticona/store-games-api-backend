@@ -10,10 +10,18 @@ class RolesRequestSchema:
 
     def create(self):
         return self.namespace.model('Role Create', {
-            'name': fields.String(required=True, max_length=120)
+            'name': fields.String(required=True, min_length=2, max_length=120)
         })
 
-#* serializar los objetos del modelo
+    def update(self):
+        return self.namespace.model('Role Update', {
+            'name': fields.String(required=True, min_length=2, max_length=120)
+        })
+
+# * serializar los objetos del modelo
+
+
 class RolesResponseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = RoleModel
+        ordered = True

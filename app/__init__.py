@@ -1,13 +1,14 @@
 
 
 from os import getenv
+from turtle import title
 from flask import Flask
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import config_env
 
-## ? INSTANCIAS
+# ? INSTANCIAS
 # *instancia de flask Flask
 app = Flask(__name__)
 # * adjuntamos la confirguracion de config.py
@@ -15,7 +16,14 @@ app.config.from_object(config_env[getenv('FLASK_ENV')])
 
 # *instancia de flask-restx Api
 # y le pasamos como parametro las instacia de de flask
-api = Api(app)
+api = Api(
+    app,
+    title='Boilerplate Flask Admin',
+    version='0.0.1',
+    description='EndPoint de nuestro Boilerplate Admin',
+    contact='paulticona264riddick@gmail.com',
+    doc='/swagger-ui'
+)
 
 # *instancia de flask-sqlalchemy SQLAlchemy
 db = SQLAlchemy(app)
