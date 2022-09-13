@@ -57,9 +57,9 @@ class rolesGetById(Resource):
         return controller.update(id, request.json)
 
     def delete(self, id):
-        return {
-            'message': f'DELETE ID: {id}',
-        }
+        '''Desabilitare rol por ID'''
+        controller = RolesController()
+        return controller.delete(id)
 
 
 api.add_namespace(roles_ns)
