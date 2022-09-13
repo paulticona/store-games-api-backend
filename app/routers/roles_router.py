@@ -1,12 +1,15 @@
 
+import json
 from app import api
+from flask import request
 from flask_restx import Resource
 from app.schemas.roles_schema import RolesRequestSchema
+from app.controllers.roles_controller import RolesControler
 
 # ?crear modulo de usuarios
 roles_ns = api.namespace(
     name='Roles',
-    description='Rutas de Roles',
+    description='Rutas del modulo Roles',
     # *llamda de todas las rutas con el contexto /global
     # localhost:5000/global
     # contexto /usuers
@@ -24,10 +27,14 @@ class Roles(Resource):
         return {
             'message':  'hola Usuario',
         }
-    @api.expect(request_schema.create(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ), validate=True)
+
+    @api.expect(request_schema.create(), validate=True)
     def post(self):
         # describimos en swagger
         '''Creacion de Roles'''
+        #* hacemos un request del body
+        controler = RolesControler()
+        return controler.create(request.json)
 
         return {
             'message': 'hola Usuario',

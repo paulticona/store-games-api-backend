@@ -8,5 +8,6 @@ class RolesRequestSchema:
 
     def create(self):
         return self.namespace.model('Role Create', {
-            'name': fields.String(required=True, max_lengt=120),
+            'name': fields.String(required=True, max_length=120)
         })
+
