@@ -1,5 +1,4 @@
 
-import json
 from app import api
 from flask import request
 from flask_restx import Resource
@@ -35,10 +34,6 @@ class Roles(Resource):
         # * hacemos un request del body
         controler = RolesController()
         return controler.create(request.json)
-
-        return {
-            'message': 'hola Usuario',
-        }
 
 # ? Rutas Usuarios para CREAR MODIFICAR
 

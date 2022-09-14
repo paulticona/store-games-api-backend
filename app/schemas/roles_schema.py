@@ -1,4 +1,4 @@
-from unittest.util import _MAX_LENGTH
+
 from flask_restx import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from app.models.roles_model import RoleModel

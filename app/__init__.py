@@ -30,3 +30,4 @@ db = SQLAlchemy(app)
 
 # *instancia de flask_migrate migrate
 migrate = Migrate(app, db)
+
