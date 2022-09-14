@@ -12,6 +12,7 @@ class UsersController:
         try:
             records = self.model.where(status=True).order_by('id').all()
             response = self.schema(many=True)
+
             return {
                 'data': response.dump(records)
             }
@@ -20,6 +21,7 @@ class UsersController:
                 'message': 'Orcurrio un error',
                 'error': str(e)
             }, 500
+
     def getById(self, id):
         try:
            # SELECT FROM roles WHERE id = id
@@ -46,7 +48,7 @@ class UsersController:
             # * agregamos la data a la DB mediente la conneccion
             db.session.add(new_record)
             db.session.commit()
-            #* serializamos el objeto
+            # * serializamos el objeto
             response = self.schema(many=False)
             return {
                 'message': 'el user se creo con exito',
@@ -84,16 +86,15 @@ class UsersController:
                 'error': str(e)
             }, 500
 
-
     def delete(self, id):
         try:
             if record := self.model.where(id=id).first():
-    
+
                 if record.status:
                     record.update(status=False)
                     db.session.add(record)
                     db.session.commit()
-                return{
+                return {
                     'message': 'Se desabilito el usuario con exito'
                 }
 
@@ -102,4 +103,4 @@ class UsersController:
             return {
                 'message': 'Orcurrio un error',
                 'error': str(e)
-            }, 500  
+            }, 500

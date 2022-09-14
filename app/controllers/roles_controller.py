@@ -3,6 +3,7 @@ from app import db
 from app.models.roles_model import RoleModel
 from app.schemas.roles_schema import RolesResponseSchema
 
+
 class RolesController:
     def __init__(self):
         self.model = RoleModel
@@ -12,6 +13,7 @@ class RolesController:
         try:
             records = self.model.where(status=True).order_by('id').all()
             response = self.schema(many=True)
+
             return {
                 'data': response.dump(records)
             }
@@ -85,16 +87,16 @@ class RolesController:
                 'message': 'Orcurrio un error',
                 'error': str(e)
             }, 500
-    
+
     def delete(self, id):
         try:
             if record := self.model.where(id=id).first():
-    
+
                 if record.status:
                     record.update(status=False)
                     db.session.add(record)
                     db.session.commit()
-                return{
+                return {
                     'message': 'Se desabilito el rol con exito'
                 }
 
@@ -103,4 +105,4 @@ class RolesController:
             return {
                 'message': 'Orcurrio un error',
                 'error': str(e)
-            }, 500  
+            }, 500

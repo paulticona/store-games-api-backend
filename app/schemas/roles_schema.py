@@ -2,6 +2,7 @@
 from flask_restx import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from app.models.roles_model import RoleModel
+from marshmallow.fields import Nested
 
 
 class RolesRequestSchema:
@@ -25,3 +26,4 @@ class RolesResponseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = RoleModel
         ordered = True
+    users = Nested('UsersResponseSchema',exclude=['roles'] , many=True)

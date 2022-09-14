@@ -1,7 +1,8 @@
 
-
 from app.models.base import BaseModel
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
+
 
 
 class UserModel(BaseModel):
@@ -17,6 +18,6 @@ class UserModel(BaseModel):
     email = Column(String(120), unique=True)
 
     rol_id = Column(Integer, ForeignKey('roles.id'), default=1)
+    roles = relationship('RoleModel', uselist=False, back_populates='users')
 
     status = Column(Boolean, default=True)
-
