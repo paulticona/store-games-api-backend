@@ -15,13 +15,23 @@ app = Flask(__name__)
 # * adjuntamos la confirguracion de config.py
 app.config.from_object(config_env[getenv('FLASK_ENV')])
 
+authorizations = {
+    'apikey': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'Authorization'
+    }
+}
+
 # *instancia de flask-restx Api
-# y le pasamos como parametro las instacia de de flask
+# y le pasamos como parametro las instacia de d e flask
 api = Api(
     app,
     title='Boilerplate Flask Admin',
     version='0.0.1',
     description='EndPoint de nuestro Boilerplate Admin',
+    authorizations=authorizations,
+    security='apikey',
     contact='paulticona264riddick@gmail.com',
     doc='/swagger-ui'
 )

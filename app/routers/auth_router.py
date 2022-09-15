@@ -17,6 +17,8 @@ class Signin(Resource):
 
     @api.expect(request_schema.signIn(), validate=True)
     def post(self):
+
+        #  * el token creado es para validar el usurario y contraseña
        '''Crear token de autenticación''' 
        controller = AuthController()
        return controller.signIn(request.json)

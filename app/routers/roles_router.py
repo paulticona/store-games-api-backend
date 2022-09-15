@@ -4,6 +4,7 @@ from flask import request
 from flask_restx import Resource
 from app.schemas.roles_schema import RolesRequestSchema
 from app.controllers.roles_controller import RolesController
+from flask_jwt_extended import jwt_required
 
 # ?crear modulo de usuarios
 roles_ns = api.namespace(
@@ -22,6 +23,7 @@ request_schema = RolesRequestSchema(roles_ns)
 
 @roles_ns.route('/')
 class Roles(Resource):
+    @jwt_required()
     def get(self):
         '''Listar todos los roles'''
         controller = RolesController()

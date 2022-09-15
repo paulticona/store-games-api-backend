@@ -1,6 +1,6 @@
 
 from app.models.users_model import UserModel
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, create_refresh_token
 
 class AuthController:
     def __init__(self):
@@ -18,9 +18,13 @@ class AuthController:
                     access_token = create_access_token(
                         identity=record.id
                     )
+                    refresh_token = create_refresh_token(
+                        identity=record.id
+                    )
                     return {
-                        'access_token': access_token
-                    }
+                        'access_token': access_token,
+                        'refresh_token': refresh_token   
+                    }, 200
                 else:
                     raise Exception('password Invalid')
 
