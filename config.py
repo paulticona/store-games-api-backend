@@ -7,8 +7,8 @@ class BaseConfig:
     SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = getenv('JWT_SECRET')
-    JWT_ACCESS_TOKEN = timedelta(hours=1)
-    JWT_REFRESH_TOKEN = timedelta(hours=3)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=15)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=3)
 
 
 class DevelopmentConfig(BaseConfig):

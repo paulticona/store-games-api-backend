@@ -22,7 +22,10 @@ request_schema = RolesRequestSchema(roles_ns)
 
 
 @roles_ns.route('/')
+# agrega el metodo de seguridad de Bearer con icono de 
+@roles_ns.doc(security='Bearer')
 class Roles(Resource):
+
     @jwt_required()
     def get(self):
         '''Listar todos los roles'''
@@ -41,6 +44,7 @@ class Roles(Resource):
 
 
 @roles_ns.route('/<int:id>')
+@roles_ns.doc(security='Bearer')
 class rolesGetById(Resource):
     def get(self, id):
         '''Obtener un rol por el ID'''

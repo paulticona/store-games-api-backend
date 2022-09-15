@@ -1,7 +1,6 @@
 
 
 from os import getenv
-from turtle import title
 from flask import Flask
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
@@ -16,7 +15,7 @@ app = Flask(__name__)
 app.config.from_object(config_env[getenv('FLASK_ENV')])
 
 authorizations = {
-    'apikey': {
+    'Bearer': {
         'type': 'apiKey',
         'in': 'header',
         'name': 'Authorization'
@@ -31,7 +30,6 @@ api = Api(
     version='0.0.1',
     description='EndPoint de nuestro Boilerplate Admin',
     authorizations=authorizations,
-    security='apikey',
     contact='paulticona264riddick@gmail.com',
     doc='/swagger-ui'
 )
