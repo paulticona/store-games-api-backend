@@ -8,14 +8,30 @@ class UsersController:
         self.model = UserModel
         self.schema = UsersResponseSchema
 
-    def all(self):
+    def all(self, page, per_page):
         try:
-            records = self.model.where(status=True).order_by('id').all()
+            # Paginate
+            # page -> La pagina actual
+            # per_page -> total de registros por pagina
+            # total -> total de registros
+            # pages -> total de paginas
+            # items -> Lista de objetos
+            records = self.model.where(status=True).order_by('id').paginate(
+                per_page=per_page, page=page
+            )
+            print(records.__dict__)
             response = self.schema(many=True)
-
             return {
-                'data': response.dump(records)
+                # response.dump(records)
+                'resultados': response.dump(records.items),
+                'pagination': {
+                    'totalRecords': records.total,
+                    'totalPages': records.pages,
+                    'per_page': records.per_page,
+                    'currentpage': records.page
+                }
             }
+
         except Exception as e:
             return {
                 'message': 'Orcurrio un error',

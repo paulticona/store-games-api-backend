@@ -25,10 +25,12 @@ request_schema = UsersRequestSchema(usuarios_ns)
 @usuarios_ns.doc(security='Bearer')
 class Usuario(Resource):
     @jwt_required()
+    @usuarios_ns.expect(request_schema.all())
     def get(self):
         '''Listar Usuarios'''
+        query_params  = request_schema.all().parse_args()
         controller = UsersController()
-        return controller.all()
+        return controller.all(query_params['page'], query_params['per_page'])
 
     @jwt_required()
     @api.expect(request_schema.create(), validate=True)
