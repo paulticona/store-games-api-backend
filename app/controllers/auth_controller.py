@@ -34,3 +34,16 @@ class AuthController:
                 'message': 'Orcurrio un error',
                 'error': str(e)
             }, 500
+    def refreshToken(self, identity):
+        try:
+            access_token = create_access_token(
+                identity=identity
+            )
+            return {
+                'access_token': access_token
+            }, 200 
+        except Exception as e:
+           return {
+                'message': 'Orcurrio un error',
+                'error': str(e)
+            }, 500

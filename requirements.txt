@@ -20,13 +20,12 @@ MarkupSafe==2.1.1
 marshmallow==3.17.1
 marshmallow-sqlalchemy==0.28.1
 packaging==21.3
-psycopg2==2.9.3
 psycopg2-binary==2.9.3
 pycodestyle==2.9.1
 PyJWT==2.4.0
 pyparsing==3.0.9
 pyrsistent==0.18.1
-python-dotenv==0.21.0
+python-dotenv==0.20.0
 pytz==2022.2.1
 restx-monkey==0.2.1
 six==1.16.0

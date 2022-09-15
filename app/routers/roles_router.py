@@ -22,10 +22,12 @@ request_schema = RolesRequestSchema(roles_ns)
 
 
 @roles_ns.route('/')
-# agrega el metodo de seguridad de Bearer con icono de 
+# ?@roles_ns.doc(security='Bearer')
+# ?agrega el metodo de seguridad de Bearer con icono de seguridad
 @roles_ns.doc(security='Bearer')
 class Roles(Resource):
-
+    # ?@jwt_required() agrega validacion dediante el access_token
+    # ?@jwt_required() tenemos que importar el jwt_required from flask_jwt_extended
     @jwt_required()
     def get(self):
         '''Listar todos los roles'''

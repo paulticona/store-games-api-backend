@@ -3,6 +3,7 @@ from flask import request
 from flask_restx import Resource
 from app.schemas.users_schema import UsersRequestSchema
 from app.controllers.user_controller import UsersController
+from flask_jwt_extended import jwt_required
 
 # ?crear modulo de usuarios
 usuarios_ns = api.namespace(
@@ -17,14 +18,19 @@ usuarios_ns = api.namespace(
 request_schema = UsersRequestSchema(usuarios_ns)
 # ? Rutas Usuarios para OBTENER
 
+# ! video 02:15:00
+
 
 @usuarios_ns.route('/')
+@usuarios_ns.doc(security='Bearer')
 class Usuario(Resource):
+    @jwt_required()
     def get(self):
         '''Listar Usuarios'''
         controller = UsersController()
         return controller.all()
 
+    @jwt_required()
     @api.expect(request_schema.create(), validate=True)
     def post(self):
         # describimos en swagger
@@ -36,12 +42,15 @@ class Usuario(Resource):
 
 
 @usuarios_ns.route('/<int:id>')
+@usuarios_ns.doc(security='Bearer')
 class usuariosGetById(Resource):
+    @jwt_required()
     def get(self, id):
         '''Obtener un user por el ID'''
         controller = UsersController()
         return controller.getById(id)
 
+    @jwt_required()
     @api.expect(request_schema.update(), validate=True)
     def put(self, id):
         '''Actualizar un User por el ID'''
@@ -49,6 +58,7 @@ class usuariosGetById(Resource):
         controller = UsersController()
         return controller.update(id, request.json)
 
+    @jwt_required()
     def delete(self, id):
         '''Desabilitare User por ID'''
         controller = UsersController()
