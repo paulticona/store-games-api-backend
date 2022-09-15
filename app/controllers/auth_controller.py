@@ -1,5 +1,6 @@
 
 from app.models.users_model import UserModel
+from flask_jwt_extended import create_access_token
 
 class AuthController:
     def __init__(self):
@@ -14,8 +15,11 @@ class AuthController:
                     status=True    
             ).first():
                 if record.checkPassword(data.get('password')):
+                    access_token = create_access_token(
+                        identity=record.id
+                    )
                     return {
-                        'message': 'success'
+                        'access_token': access_token
                     }
                 else:
                     raise Exception('password Invalid')
