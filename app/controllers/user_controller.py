@@ -45,6 +45,7 @@ class UsersController:
         try:
             # key=valuye key=value1 ...key=valuen
             new_record = self.model.create(**data)
+            new_record.hashPassword()
             # * agregamos la data a la DB mediente la conneccion
             db.session.add(new_record)
             db.session.commit()

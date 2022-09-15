@@ -2,7 +2,7 @@
 from app.models.base import BaseModel
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-
+from bcrypt import hashpw, gensalt
 
 
 class UserModel(BaseModel):
@@ -21,3 +21,15 @@ class UserModel(BaseModel):
     roles = relationship('RoleModel', uselist=False, back_populates='users')
 
     status = Column(Boolean, default=True)
+
+
+    def hashPassword(self):
+        pwd_encode = self.password.encode('utf-8')
+        pwd_hash = hashpw(pwd_encode, gensalt(rounds=10))
+        self.password = pwd_hash.decode('utf-8')
+
+    # pass = avion
+    # hash = 4v10n
+    # 5v21n
+
+
