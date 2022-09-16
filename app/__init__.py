@@ -8,6 +8,7 @@ from flask_migrate import Migrate
 from config import config_env
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from flask_cors import CORS
 
 # ? INSTANCIAS
 # *instancia de flask Flask
@@ -35,7 +36,7 @@ api = Api(
     doc='/swagger-ui'
 )
 
-# *instancia de flask-sqlalchemy SQLAlchemy
+# *instancia de flask-sqlalchemy SQLAlchemy  
 db = SQLAlchemy(app)
 
 # *instancia de flask_migrate migrate
@@ -44,3 +45,5 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 
 mail = Mail(app)
+
+CORS(app)
