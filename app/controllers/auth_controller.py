@@ -1,11 +1,15 @@
 
 from app.models.users_model import UserModel
 from flask_jwt_extended import create_access_token, create_refresh_token
+from secrets import token_hex
+from app import db
+from app.utils.mailing import Mailing
 
 class AuthController:
     def __init__(self):
         self.model = UserModel
         self.schemas = ''
+        self.mailing = Mailing()
     def signIn(self, data): 
         try:
             # ? logeode usuarios
@@ -47,3 +51,26 @@ class AuthController:
                 'message': 'Orcurrio un error',
                 'error': str(e)
             }, 500
+    
+    def resetPassword(self, data):
+        try:
+            if record := self.model.where(email=data.get('email'), status=True).first():
+                new_password = token_hex(5)
+                record.password = new_password
+                #record.update(password=new_password)
+                record.hashPassword()
+                username = record.username
+                self.mailing.emailResetPassword(record.email, new_password, username) 
+
+                db.session.add(record)
+                db.session.commit()
+                return{
+                    'message': 'Password changed successfully'
+                }, 200 
+            raise Exception('No se encontro el usuario')
+        except Exception as e:
+            return {
+                'message': 'Orcurrio un error',
+                'error': str(e)
+            }, 500
+    

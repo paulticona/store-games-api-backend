@@ -10,6 +10,13 @@ class BaseConfig:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=3)
 
+    MAIL_SERVER = getenv('MAIL_SERVER')
+    MAIL_PORT = getenv('MAIL_PORT')
+    MAIL_USE_TLS = bool(getenv('MAIL_USE_TLS'))
+    MAIL_USERNAME = getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = getenv('MAIL_PASSWORD')
+    MAIL_DEBUG = False
+
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True

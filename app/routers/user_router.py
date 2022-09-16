@@ -51,7 +51,7 @@ class usuariosGetById(Resource):
         '''Obtener un user por el ID'''
         controller = UsersController()
         return controller.getById(id)
-
+        
     @jwt_required()
     @api.expect(request_schema.update(), validate=True)
     def put(self, id):
