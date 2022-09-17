@@ -33,10 +33,10 @@ api = Api(
     description='EndPoint de nuestro Boilerplate Admin',
     authorizations=authorizations,
     contact='paulticona264riddick@gmail.com',
-    doc='/swagger-ui'
+    doc='/'
 )
 
-# *instancia de flask-sqlalchemy SQLAlchemy  
+# *instancia de flask-sqlalchemy SQLAlchemy
 db = SQLAlchemy(app)
 
 # *instancia de flask_migrate migrate
