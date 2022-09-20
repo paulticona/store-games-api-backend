@@ -34,7 +34,6 @@ class Roles(Resource):
         controller = RolesController()
         return controller.all()
 
-    @api.expect(request_schema.create(), validate=True)
     def post(self):
         # describimos en swagger
         '''Creacion de Roles'''

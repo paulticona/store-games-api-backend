@@ -4,6 +4,7 @@ from flask_restx import Resource
 from app.schemas.users_schema import UsersRequestSchema
 from app.controllers.user_controller import UsersController
 from flask_jwt_extended import jwt_required
+from app.schemas.auth_schema import AuthRequestSchema
 
 # ?crear modulo de usuarios
 usuarios_ns = api.namespace(

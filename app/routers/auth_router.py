@@ -4,7 +4,8 @@ from app.schemas.auth_schema import AuthRequestSchema
 from app.controllers.auth_controller import AuthController
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from flask_mail import Message
+from app.schemas.users_schema import UsersRequestSchema
+from app.controllers.user_controller import UsersController
 
 auth_ns = api.namespace(
     name='Autenticacion',
@@ -13,6 +14,7 @@ auth_ns = api.namespace(
 )
 
 request_schema = AuthRequestSchema(auth_ns)
+user_schema = UsersRequestSchema(auth_ns)
 
 
 @auth_ns.route('/signin')
@@ -27,6 +29,16 @@ class Signin(Resource):
         return controller.signIn(request.json)
 
 
+# Ende point de  Creacion de usuario
+@auth_ns.route('/signup')
+class SignUp(Resource):
+    @api.expect(user_schema.create(), validate=True)
+    def post(self):
+        '''Creacion de Usuarios'''
+        controller = UsersController()
+        return controller.create(request.json)
+
+
 @auth_ns.route('/reset_password')
 class ResetPassword(Resource):
     @auth_ns.expect(request_schema.resetPassword(), validate=True)
@@ -34,6 +46,7 @@ class ResetPassword(Resource):
         '''Resetear la contraseña de un usuario.'''
         controller = AuthController()
         return controller.resetPassword(request.json)
+
 
 @auth_ns.route('/token/refresh')
 class TokenRefresh(Resource):
