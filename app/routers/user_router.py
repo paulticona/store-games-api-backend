@@ -33,7 +33,8 @@ class Usuario(Resource):
         controller = UsersController()
         return controller.all(query_params['page'], query_params['per_page'])
 
-    
+
+    @api.expect(request_schema.create(), validate=True)
     def post(self):
         # describimos en swagger
         '''Creacion de Usuarios'''
