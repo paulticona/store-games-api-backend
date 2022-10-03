@@ -33,8 +33,7 @@ class Usuario(Resource):
         controller = UsersController()
         return controller.all(query_params['page'], query_params['per_page'])
 
-    @jwt_required()
-    @api.expect(request_schema.create(), validate=True)
+    
     def post(self):
         # describimos en swagger
         '''Creacion de Usuarios'''
