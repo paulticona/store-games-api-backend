@@ -29,11 +29,11 @@ class Usuario(Resource):
     @usuarios_ns.expect(request_schema.all())
     def get(self):
         '''Listar Usuarios'''
-        query_params  = request_schema.all().parse_args()
+        query_params = request_schema.all().parse_args()
         controller = UsersController()
         return controller.all(query_params['page'], query_params['per_page'])
 
-
+    @jwt_required()
     @api.expect(request_schema.create(), validate=True)
     def post(self):
         # describimos en swagger
@@ -52,7 +52,7 @@ class usuariosGetById(Resource):
         '''Obtener un user por el ID'''
         controller = UsersController()
         return controller.getById(id)
-        
+
     @jwt_required()
     @api.expect(request_schema.update(), validate=True)
     def put(self, id):
