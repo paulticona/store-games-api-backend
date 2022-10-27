@@ -22,6 +22,8 @@ class UserModel(BaseModel):
 
     status = Column(Boolean, default=True)
 
+    inventory = relationship('InventoryModel', uselist=False, back_populates='users')
+
 
     def hashPassword(self):
         pwd_encode = self.password.encode('utf-8')
