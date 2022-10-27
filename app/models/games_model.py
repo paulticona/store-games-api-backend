@@ -1,5 +1,5 @@
 from app.models.base import BaseModel
-from sqlalchemy import Column, Integer, Boolean, String, Text, Float, ForeignKey
+from sqlalchemy import Column, Integer, Boolean, String, Text, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
 
 class GameModel(BaseModel):
@@ -15,7 +15,7 @@ class GameModel(BaseModel):
     platform = Column(String)
     publisher = Column(String)
     developer = Column(String)
-    release_date = Column(String)
+    release_date = Column(Date)
     category_id = Column(Integer, ForeignKey('categories.id'))
     status = Column(Boolean, default=True)
 

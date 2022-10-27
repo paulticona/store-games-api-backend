@@ -23,6 +23,7 @@ class UserModel(BaseModel):
     status = Column(Boolean, default=True)
 
     inventory = relationship('InventoryModel', uselist=False, back_populates='users')
+    wallet = relationship('WalletModel', uselist=False, back_populates='users')
 
 
     def hashPassword(self):
