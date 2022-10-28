@@ -26,4 +26,4 @@ class RolesResponseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = RoleModel
         ordered = True
-    users = Nested('UsersResponseSchema',exclude=['roles'] , many=True)
+    users = Nested('UsersResponseSchema', exclude=['roles'] , many=True)
