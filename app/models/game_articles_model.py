@@ -14,6 +14,6 @@ class GameArticleModel(BaseModel):
     games_id = Column(Integer, ForeignKey('games.id'))
     status = Column(Boolean, default=True)
 
-    games = relationship('GameModel', uselist=False, back_populates='articles')
+    game_articles = relationship('GameModel', uselist=False, back_populates='articles')
     inventory = relationship('InventoryModel', uselist=False, back_populates='game_articles')
-    shopping_cart = relationship('ShoppingCartModel', uselist=True, back_populates='article')
+    shopping_cart_article = relationship('ShoppingCartModel', uselist=True, back_populates='article')

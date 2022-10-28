@@ -22,8 +22,8 @@ class UserModel(BaseModel):
 
     status = Column(Boolean, default=True)
 
-    inventory = relationship('InventoryModel', uselist=False, back_populates='users')
-    wallet = relationship('WalletModel', uselist=False, back_populates='users')
+    inventory_user = relationship('InventoryModel', uselist=False, back_populates='users_inventory')
+    user_wallet = relationship('WalletModel', uselist=False, back_populates='wallet_user')
 
 
     def hashPassword(self):

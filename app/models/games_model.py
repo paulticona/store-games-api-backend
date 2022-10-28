@@ -20,6 +20,6 @@ class GameModel(BaseModel):
     status = Column(Boolean, default=True)
 
     category = relationship('CategoryModel', uselist=False, back_populates='games')
-    articles = relationship('GameArticleModel', uselist=True, back_populates='games')
-    inventory = relationship('InventoryModel', uselist=True, back_populates='games')
+    articles = relationship('GameArticleModel', uselist=True, back_populates='game_articles')
+    inventory_game = relationship('InventoryModel', uselist=True, back_populates='games_inventory')
     shopping_cart = relationship('ShoppingCartModel', uselist=True, back_populates='game')

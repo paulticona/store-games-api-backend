@@ -28,9 +28,9 @@ authorizations = {
 # y le pasamos como parametro las instacia de d e flask
 api = Api(
     app,
-    title='Boilerplate Flask Admin',
+    title='Store Games Admin',
     version='0.0.1',
-    description='EndPoint de nuestro Boilerplate Admin',
+    description='EndPoints StoreGames',
     authorizations=authorizations,
     contact='paulticona264riddick@gmail.com',
     doc='/'

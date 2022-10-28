@@ -13,4 +13,4 @@ class WalletModel(BaseModel):
 
     transaction_account = relationship(
         'WalletAccountModel', uselist=False, back_populates='wallet')
-    users = relationship('UserModel', uselist=False, back_populates='wallet')
+    wallet_user = relationship('UserModel', uselist=False, back_populates='user_wallet')

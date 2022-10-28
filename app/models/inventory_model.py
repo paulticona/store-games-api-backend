@@ -14,5 +14,5 @@ class InventoryModel(BaseModel):
     status = Column(Boolean, default=True)
 
     game_articles = relationship('GameArticleModel', uselist=True, back_populates='inventory')
-    games = relationship('GameModel', uselist=False, back_populates='inventory')
-    users = relationship('UserModel', uselist=False, back_populates='inventory')
+    games_inventory = relationship('GameModel', uselist=False, back_populates='inventory_game')
+    users_inventory = relationship('UserModel', uselist=False, back_populates='inventory_user')

@@ -12,4 +12,4 @@ class ShoppingCartModel(BaseModel):
     article_id = Column(Integer, ForeignKey('game_articles.id'))
 
     game = relationship('GameModel', uselist=False, back_populates='shopping_cart')
-    article = relationship('GameArticleModel', uselist=False, back_populates='shopping_cart')
+    article = relationship('GameArticleModel', uselist=False, back_populates='shopping_cart_article')
