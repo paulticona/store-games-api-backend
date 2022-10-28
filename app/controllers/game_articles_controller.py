@@ -1,15 +1,12 @@
 from app import db
-from app.models.games_model import GameModel
-from app.schemas.games_schema import GameResponseSchema
-from app.utils.bucket import Bucket
+from app.models.game_articles_model import GameArticleModel
+from app.schemas.game_articles_schema import GameArticlesResponseSchema
 
-class GameController:
+
+class GameArticlesController:
     def __init__(self):
-        self.model = GameModel
-        self.schema = GameResponseSchema
-        self.bucket = Bucket('storegames', 'games')
-
-        self.__allowed_extensions = ['jpg', 'jpeg', 'png']
+        self.model = GameArticleModel
+        self.schema = GameArticlesResponseSchema
 
     def all(self):
         try:
@@ -34,7 +31,7 @@ class GameController:
                 }, 200
 
             return {
-                'message': 'NO se encontro el Game mencionado'
+                'message': 'NO se encontro el Game Articles mencionado'
             }, 404
 
         except Exception as e:
@@ -45,9 +42,6 @@ class GameController:
 
     def create(self, data):
         try:
-            filename, stream = self.__validateExtencionImage(data['image'])
-            image_url = self.bucket.uploadObject(stream, filename)
-            data['image'] = image_url
 
             # key=valuye key=value1 ...key=valuen
             new_record = self.model.create(**data)
@@ -57,8 +51,8 @@ class GameController:
 
             response = self.schema(many=False)
             return {
-                'message': 'El Game se creo con exito',
-                #'data': response.dump(new_record)
+                'message': 'El Game Articles se creo con exito',
+                'data': response.dump(new_record)
             }, 201
         except Exception as e:
             db.session.rollback()
@@ -66,31 +60,24 @@ class GameController:
                 'message': 'Orcurrio un error',
                 'error': str(e)
             }, 500
-            
 
     def update(self, id, data):
         try:
             #! 1:26 video
             # UPDATE roles SET field=value WHERE id = ?
             if record := self.model.where(id=id).first():
-                # validamos que haya una imagen para actualizar
-                if data['image']:
-                    filename, stream = self.__validateExtencionImage(data['image'])
-                    image_url = self.bucket.uploadObject(stream, filename)
-                    data['image'] = image_url
-                    
                 record.update(**data)
                 db.session.add(record)
                 db.session.commit()
 
                 response = self.schema(many=False)
                 return {
-                    'message': 'El Game de actulizo con exito',
+                    'message': 'El Game Articles de actulizo con exito',
                     'data': response.dump(record),
                 }, 200
 
             return {
-                'message': 'NO se encontro el Game mecionado'
+                'message': 'NO se encontro el Game Articles mecionado'
             }, 404
         except Exception as e:
             db.session.rollback()
@@ -108,7 +95,7 @@ class GameController:
                     db.session.add(record)
                     db.session.commit()
                 return {
-                    'message': 'Se desabilito el Game con exito'
+                    'message': 'Se desabilito el Game Articles con exito'
                 }
 
         except Exception as e:
@@ -117,13 +104,3 @@ class GameController:
                 'message': 'Orcurrio un error',
                 'error': str(e)
             }, 500
-
-    def __validateExtencionImage(self, image):
-        filename = image.filename
-        stream = image.stream
-        # nombre_achivo.extencion el indice 1
-        extencion = filename.split('.')[1]
-        if extencion not in self.__allowed_extensions:
-            raise Exception('El tipo de archivo usado no esta permitido')
-
-        return filename, stream

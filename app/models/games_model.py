@@ -15,7 +15,7 @@ class GameModel(BaseModel):
     platform = Column(String)
     publisher = Column(String)
     developer = Column(String)
-    release_date = Column(Date)
+    release_date = Column(String)
     category_id = Column(Integer, ForeignKey('categories.id'))
     status = Column(Boolean, default=True)
 

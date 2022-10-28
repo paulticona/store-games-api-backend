@@ -27,8 +27,9 @@ class Games(Resource):
     @namespace.expect(request_schema.create(), validate=True)
     def post(self):
         '''Crear un Game'''
+        form = request_schema.create().parse_args()
         controller = GameController()
-        return controller.create(request.json)
+        return controller.create(form)
 
 
 @namespace.route('/<int:id>')
@@ -44,8 +45,9 @@ class GamesById(Resource):
     @namespace.expect(request_schema.update(), validate=True)
     def put(self, id):
         '''Actualizar un Game por el ID'''
+        form = request_schema.update().parse_args()
         controller = GameController()
-        return controller.update(id, request.json)
+        return controller.update(id, form)
 
     @jwt_required()
     def delete(self, id):
