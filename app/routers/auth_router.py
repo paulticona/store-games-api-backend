@@ -8,7 +8,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.controllers.user_controller import UsersController
 
 auth_ns = api.namespace(
-    name='Autenticacion',
+    name='Autenticación',
     description='Rutas del modulo de autenticación',
     path='/auth'
 )

@@ -1,20 +1,24 @@
 from app import db
 from app.models.wallet_model import WalletModel
 from app.schemas.wallet_schema import WalletResponseSchema
-
+from flask_jwt_extended import current_user
 
 class WalletController:
     def __init__(self):
         self.model = WalletModel
         self.schema = WalletResponseSchema
+        self.user_id = current_user['id']
 
     def all(self):
         try:
-            records = self.model.where(status=True).order_by('id').all()
+            # records = self.model.where(status=True).order_by('id').all()
+            # response = self.schema(many=True)
+            records = self.model.where(user_id=self.user_id).order_by('id').all()
             response = self.schema(many=True)
+            data = response.dump(records)
 
             return {
-                'data': response.dump(records)
+                'data': data
             }
         except Exception as e:
             return {

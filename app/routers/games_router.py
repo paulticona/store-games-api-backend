@@ -6,7 +6,7 @@ from app.schemas.games_schema import GameRequestSchema
 from app.controllers.games_controller import GameController
 
 namespace = api.namespace(
-    name='Games',
+    name='Juegos',
     description='Endpoints para las Games',
     path='/games'
 )

@@ -1,6 +1,7 @@
 from flask_restx import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from app.models.wallet_model import WalletModel
+from marshmallow.fields import Nested
 
 
 class WalletRequestSchema:
@@ -26,3 +27,5 @@ class WalletResponseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = WalletModel
         ordered = True
+
+    transaction_account = Nested('WalletAccountResponseSchema', many=False)

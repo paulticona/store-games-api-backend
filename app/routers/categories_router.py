@@ -6,7 +6,7 @@ from app.schemas.categories_schema import CategoriesRequestSchema
 from app.controllers.categories_controller import CategoriesController
 
 namespace = api.namespace(
-    name='Categories',
+    name='Categorías',
     description='Endpoints para las Categorias',
     path='/categories'
 )

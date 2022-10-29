@@ -6,7 +6,7 @@ from app.schemas.wallet_schema import WalletRequestSchema
 from app.controllers.wallet_controller import WalletController
 
 namespace = api.namespace(
-    name='Wallet',
+    name='Billetera',
     description='Endpoints para la Wallet',
     path='/wallet'
 )

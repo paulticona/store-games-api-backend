@@ -6,7 +6,7 @@ from app.schemas.game_articles_schema import GameArticlesRequestSchema
 from app.controllers.game_articles_controller import GameArticlesController
 
 namespace = api.namespace(
-    name='Game Articles',
+    name='Artículos de los Juegos',
     description='Endpoints para las Games Articles',
     path='/game_articles'
 )
@@ -16,7 +16,7 @@ request_schema = GameArticlesRequestSchema(namespace)
 
 @namespace.route('')
 @namespace.doc(security='Bearer')
-class GamesArticles(Resource):
+class GameArticles(Resource):
     @jwt_required()
     def get(self):
         '''Listar todas los Games Articles'''
@@ -27,16 +27,17 @@ class GamesArticles(Resource):
     @namespace.expect(request_schema.create(), validate=True)
     def post(self):
         '''Crear un Game Articles'''
+        form = request_schema.create().parse_args()
         controller = GameArticlesController()
-        return controller.create(request.json)
+        return controller.create(form)
 
 
 @namespace.route('/<int:id>')
 @namespace.doc(security='Bearer')
-class  GamesArticlesById(Resource):
+class GameArticlesById(Resource):
     @jwt_required()
     def get(self, id):
-        '''Obtener un Game Articles  por el ID'''
+        '''Obtener un Game Articles por el ID'''
         controller = GameArticlesController()
         return controller.getById(id)
 
@@ -44,8 +45,9 @@ class  GamesArticlesById(Resource):
     @namespace.expect(request_schema.update(), validate=True)
     def put(self, id):
         '''Actualizar un Game Articles por el ID'''
+        form = request_schema.update().parse_args()
         controller = GameArticlesController()
-        return controller.update(id, request.json)
+        return controller.update(id, form)
 
     @jwt_required()
     def delete(self, id):

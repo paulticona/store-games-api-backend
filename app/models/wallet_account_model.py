@@ -10,5 +10,6 @@ class WalletAccountModel(BaseModel):
     card_number = Column(Integer)
     date_expiry = Column(Date)
     cvv = Column(Integer)
+    status = Column(Boolean, default=True)
 
     wallet = relationship('WalletModel', uselist=False, back_populates='transaction_account')
