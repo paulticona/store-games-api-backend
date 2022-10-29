@@ -1,6 +1,4 @@
-# Ecommerce
-
-[Tutorial Flask Clic Aqui](TUTORIAL.md)
+Store Games[Tutorial Flask Clic Aqui](TUTORIAL.md)
 
 ```
 
@@ -85,7 +83,7 @@ flask db upgrade -> Subimos los cambios a la base de datos
 
 ![1667017022952](image/README/1667017022952.png)
 
-### Realizamos pruebas 
+### Realizamos pruebas
 
 ![1667017200596](image/README/1667017200596.png)
 
